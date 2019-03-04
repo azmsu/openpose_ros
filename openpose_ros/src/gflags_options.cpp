@@ -14,7 +14,7 @@ DEFINE_bool(disable_multi_thread,       false,          "It would slightly reduc
 DEFINE_int32(profile_speed,             1000,           "If PROFILER_ENABLED was set in CMake or Makefile.config files, OpenPose will show some"
                                                         " runtime statistics at this frame number.");
 // OpenPose
-DEFINE_string(model_folder,             "/path/to/openpose/models/",      "Folder path (absolute or relative) where the models (pose, face, ...) are located.");
+DEFINE_string(model_folder,             "/home/andy/openpose/models",      "Folder path (absolute or relative) where the models (pose, face, ...) are located.");
 DEFINE_string(prototxt_path,            "",             "The combination `--model_folder` + `--prototxt_path` represents the whole path to the"
                                                         " prototxt file. If empty, it will use the default OpenPose ProtoTxt file.");
 DEFINE_string(caffemodel_path,          "",             "The combination `--model_folder` + `--caffemodel_path` represents the whole path to the"
@@ -32,7 +32,7 @@ DEFINE_int32(keypoint_scale,            0,              "Scaling of the (x,y) co
                                                         " corner of the image, and (1,1) the bottom-right one; and 4 for range [-1,1], where"
                                                         " (-1,-1) would be the top-left corner of the image, and (1,1) the bottom-right one. Non"
                                                         " related with `scale_number` and `scale_gap`.");
-DEFINE_int32(number_people_max,         -1,             "This parameter will limit the maximum number of people detected, by keeping the people with"
+DEFINE_int32(number_people_max,         1,             "This parameter will limit the maximum number of people detected, by keeping the people with"
                                                         " top scores. The score is based in person area over the image, body part score, as well as"
                                                         " joint score (between each pair of connected body parts). Useful if you know the exact"
                                                         " number of people in the scene, so it can remove false positives (if all the people have"
@@ -50,7 +50,7 @@ DEFINE_int32(body,                      1,              "Select 0 to disable bod
                                                         " still run the greedy association parsing algorithm");
 DEFINE_string(model_pose,               "BODY_25",      "Model to be used. E.g., `COCO` (18 keypoints), `MPI` (15 keypoints, ~10% faster), "
                                                         "`MPI_4_layers` (15 keypoints, even faster but less accurate).");
-DEFINE_string(net_resolution,           "-1x368",       "Multiples of 16. If it is increased, the accuracy potentially increases. If it is"
+DEFINE_string(net_resolution,           "-1x160",       "Multiples of 16. If it is increased, the accuracy potentially increases. If it is"
                                                         " decreased, the speed increases. For maximum speed-accuracy balance, it should keep the"
                                                         " closest aspect ratio possible to the images or videos to be processed. Using `-1` in"
                                                         " any of the dimensions, OP will choose the optimal aspect ratio depending on the user's"
@@ -83,7 +83,7 @@ DEFINE_bool(part_candidates,            false,          "Also enable `write_json
 DEFINE_double(upsampling_ratio,         0.,             "Upsampling ratio between the `net_resolution` and the output net results. A value less"
                                                         " or equal than 0 (default) will use the network default value (recommended).");
 // OpenPose Face
-DEFINE_bool(face,                       false,          "Enables face keypoint detection. It will share some parameters from the body pose, e.g."
+DEFINE_bool(face,                       true,          "Enables face keypoint detection. It will share some parameters from the body pose, e.g."
                                                         " `model_folder`. Note that this will considerable slow down the performance and increse"
                                                         " the required GPU memory. In addition, the greater number of people on the image, the"
                                                         " slower OpenPose will be.");
@@ -94,7 +94,7 @@ DEFINE_int32(face_detector,             0,              "Kind of face rectangle 
                                                         " detection for webcam (if the frame rate is high enough, i.e., >7 FPS per GPU) and video."
                                                         " This is not person ID tracking, it simply looks for hands in positions at which hands were"
                                                         " located in previous frames, but it does not guarantee the same person ID among frames.");
-DEFINE_string(face_net_resolution,      "368x368",      "Multiples of 16 and squared. Analogous to `net_resolution` but applied to the face keypoint"
+DEFINE_string(face_net_resolution,      "224x224",      "Multiples of 16 and squared. Analogous to `net_resolution` but applied to the face keypoint"
                                                         " detector. 320x320 usually works fine while giving a substantial speed up when multiple"
                                                         " faces on the image.");
 // OpenPose Hand
